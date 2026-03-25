@@ -1,0 +1,540 @@
+2026-03-23 19:20:32,877 [INFO] Запуск анализа пары BTC/USDT на таймфрейме 15m ...
+2026-03-23 19:20:36,094 [INFO] Получено 66 свечей за сегодня
+2026-03-23 19:20:36,114 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 70334.42 ниже MA. Тренд: Down
+2026-03-23 20:47:55,274 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 20:48:01,258 [INFO] Получено 72 свечей за сегодня
+2026-03-23 20:48:01,295 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 70938.13 выше MA: N/A Тренд: Up
+2026-03-23 20:48:01,296 [INFO] Цена: 70938.13 | MA: 70710.35 | Тренд: Up
+2026-03-23 20:49:01,297 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 20:49:01,591 [INFO] Получено 72 свечей за сегодня
+2026-03-23 20:49:01,606 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 70999.99 выше MA: N/A Тренд: Up
+2026-03-23 20:49:01,607 [INFO] Цена: 70999.99 | MA: 70722.72 | Тренд: Up
+2026-03-23 20:50:01,608 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:15:47,783 [INFO] Бот запущен и начинает работу...
+2026-03-23 21:15:47,783 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:15:53,054 [INFO] Получено 74 свечей за сегодня
+2026-03-23 21:15:53,074 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 70982.32 выше MA: 70892.74 Тренд: Up
+2026-03-23 21:15:53,074 [INFO] Цена: 70982.32 | MA: 70892.74 | Тренд: Up
+2026-03-23 21:16:33,037 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера (если были) под контролем.
+2026-03-23 21:18:22,745 [INFO] Бот запущен и начинает работу...
+2026-03-23 21:18:22,745 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:18:26,108 [INFO] Получено 74 свечей за сегодня
+2026-03-23 21:18:26,122 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 71032.56 выше MA: 70902.79 Тренд: Up
+2026-03-23 21:18:26,123 [INFO] Цена: 71032.56 | MA: 70902.79 | Тренд: Up
+2026-03-23 21:18:46,023 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера (если были) под контролем.
+2026-03-23 21:45:08,012 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 21:45:08,012 [INFO] Бот запущен и начинает работу...
+2026-03-23 21:45:08,012 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:45:08,336 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291508182}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit, since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291508182}
+2026-03-23 21:45:16,279 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-23 21:47:11,497 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 21:47:11,497 [INFO] Бот запущен и начинает работу...
+2026-03-23 21:47:11,498 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:47:11,816 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291631647}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit, since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291631647}
+2026-03-23 21:47:21,833 [INFO] Запрос данных для BTC/USDT на таймфрейме 15m ...
+2026-03-23 21:47:22,185 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291641880}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit, since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774291641880}
+2026-03-23 21:47:26,959 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-23 22:01:06,095 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 22:01:06,095 [INFO] Бот запущен и начинает работу...
+2026-03-23 22:01:06,095 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-23 22:01:06,655 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774292466559}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit) #since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774292466559}
+2026-03-23 22:01:16,672 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-23 22:01:17,098 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774292476798}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit) #since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774292476798}
+2026-03-23 22:01:19,759 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-23 22:14:16,019 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 22:14:16,019 [INFO] Бот запущен и начинает работу...
+2026-03-23 22:14:16,019 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-23 22:14:16,351 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774293256346}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 57, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit) #since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774293256346}
+2026-03-23 22:14:20,829 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-23 22:17:21,739 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 22:17:21,739 [INFO] Бот запущен и начинает работу...
+2026-03-23 22:17:21,740 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-23 22:17:22,104 [ERROR] Критическая ошибка: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774293442116}
+Traceback (most recent call last):
+  File "/home/edvard-user/PycharmProjects/exemple_bot/exchange.py", line 58, in <module>
+    candles = exchange.fetch_ohlcv(symbol,  timeframe, limit=limit) #since=since_timestamp)  # Загрузка свечей (теперь с since!)===>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 2594, in fetch_ohlcv
+    self.load_markets()
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 1810, in load_markets
+    currencies = self.fetch_currencies()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 1672, in fetch_currencies
+    response = self.privateGetV5AssetCoinQueryInfo(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/types.py", line 35, in unbound_method
+    return _self.request(self.path, self.api, self.method, params, config=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5316, in request
+    return self.fetch2(path, api, method, params, headers, body, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5312, in fetch2
+    raise e
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5300, in fetch2
+    return self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 735, in fetch
+    self.handle_errors(http_status_code, http_status_text, url, method, headers, http_response, json_response, request_headers, request_body)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/bybit.py", line 9291, in handle_errors
+    self.throw_exactly_matched_exception(self.exceptions['exact'], errorCode, feedback)
+  File "/home/edvard-user/PycharmProjects/exemple_bot/.venv/lib/python3.12/site-packages/ccxt/base/exchange.py", line 5718, in throw_exactly_matched_exception
+    raise exact[string](message)
+ccxt.base.errors.AuthenticationError: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774293442116}
+2026-03-23 22:17:26,412 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-23 22:23:40,831 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-23 22:23:40,831 [INFO] Бот запущен и начинает работу...
+2026-03-23 22:23:40,831 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-23 22:23:46,090 [INFO] Получено 100 свечей за сегодня
+2026-03-23 22:23:46,116 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 70919.50 ниже MA: 70944.20 Тренд: Down
+2026-03-23 22:23:46,116 [INFO] Цена: 70919.50 | MA: 70944.20 | Тренд: Down
+2026-03-23 22:23:59,492 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 06:33:57,598 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 06:33:57,634 [INFO] Бот запущен и начинает работу...
+2026-03-24 06:34:06,822 [INFO] Минимальный лот для BTCUSDT: 0.001
+2026-03-24 06:34:06,822 [INFO] Запрос данных для BTCUSDT на таймфрейме 15m ...
+2026-03-24 06:34:07,030 [INFO] Получено 100 свечей за сегодня
+2026-03-24 06:34:07,077 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 70449.30 ниже MA: 70468.38 Тренд: Down
+2026-03-24 06:34:07,300 [ERROR] Не удалось продать: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774323247220}
+2026-03-24 06:34:07,300 [INFO] Цена: 70449.30 | MA: 70468.38 | Тренд: Down
+2026-03-24 06:34:24,788 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 18:11:20,439 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 18:11:20,477 [INFO] Бот запущен и начинает работу...
+2026-03-24 18:11:28,400 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 18:11:28,400 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 18:11:28,626 [INFO] Получено 100 свечей за сегодня
+2026-03-24 18:11:28,668 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 69984.70 выше MA: 69887.68 Тренд: Up
+2026-03-24 18:11:28,918 [ERROR] Не удалось купить: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774365088803}
+2026-03-24 18:11:28,918 [INFO] Цена: 69984.70 | MA: 69887.68 | Тренд: Up
+2026-03-24 18:11:47,691 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 18:38:42,824 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 18:38:42,825 [INFO] Бот запущен и начинает работу...
+2026-03-24 18:38:47,897 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 18:38:47,898 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 18:38:48,132 [INFO] Получено 100 свечей за сегодня
+2026-03-24 18:38:48,139 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 70068.20 выше MA: 69930.66 Тренд: Up
+2026-03-24 18:38:48,378 [ERROR] Не удалось купить: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774366728444}
+2026-03-24 18:38:48,378 [INFO] Цена: 70068.20 | MA: 69930.66 | Тренд: Up
+2026-03-24 18:39:01,399 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 18:49:59,417 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 18:49:59,417 [INFO] Бот запущен и начинает работу...
+2026-03-24 18:50:05,466 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 18:50:05,466 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 18:50:05,694 [INFO] Получено 100 свечей за сегодня
+2026-03-24 18:50:05,702 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 70027.80 выше MA: 69963.40 Тренд: Up
+2026-03-24 18:50:05,936 [ERROR] Не удалось купить: bybit {"retCode":10003,"retMsg":"API key is invalid.","result":{},"retExtInfo":{},"time":1774367405905}
+2026-03-24 18:50:05,936 [INFO] Цена: 70027.80 | MA: 69963.40 | Тренд: Up
+2026-03-24 18:50:13,059 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 18:58:18,093 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 18:58:18,093 [INFO] Бот запущен и начинает работу...
+2026-03-24 18:58:23,538 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 18:58:23,538 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 18:58:23,771 [INFO] Получено 100 свечей за сегодня
+2026-03-24 18:58:23,794 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69855.10 ниже MA: 69928.86 Тренд: Down
+2026-03-24 18:58:24,042 [INFO] Ордер исполнен! ID: 35072636-2754-4f14-ad54-febcb657ab89 | Статус: None
+2026-03-24 18:58:24,042 [INFO] Цена: 69855.10 | MA: 69928.86 | Тренд: Down
+2026-03-24 18:59:24,043 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 18:59:24,315 [INFO] Получено 100 свечей за сегодня
+2026-03-24 18:59:24,331 [INFO] Цена: 69877.30 | MA: 69933.30 | Тренд: Down
+2026-03-24 19:00:24,332 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:00:24,628 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:00:24,673 [INFO] Цена: 69796.30 | MA: 69914.42 | Тренд: Down
+2026-03-24 19:00:29,072 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 19:01:47,351 [INFO] АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2923.80532622 USDT
+2026-03-24 19:01:47,352 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 19:01:47,352 [INFO] Бот запущен и начинает работу...
+2026-03-24 19:01:47,353 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 19:01:47,353 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:01:48,013 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:01:48,034 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69775.60 ниже MA: 69910.28 Тренд: Down
+2026-03-24 19:01:48,660 [INFO] Ордер исполнен! ID: 99589f51-a945-422e-b208-c48569d4384d | Статус: None
+2026-03-24 19:01:48,660 [INFO] Цена: 69775.60 | MA: 69910.28 | Тренд: Down
+2026-03-24 19:02:48,664 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:02:48,947 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:02:49,020 [INFO] Цена: 69786.50 | MA: 69912.46 | Тренд: Down
+2026-03-24 19:03:49,023 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:03:49,308 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:03:49,331 [INFO] Цена: 69822.00 | MA: 69919.56 | Тренд: Down
+2026-03-24 19:04:49,332 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:04:49,597 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:04:49,611 [INFO] Цена: 69795.10 | MA: 69914.18 | Тренд: Down
+2026-03-24 19:05:49,611 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:05:50,172 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:05:50,190 [INFO] Цена: 69780.80 | MA: 69911.32 | Тренд: Down
+2026-03-24 19:06:50,191 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:06:50,879 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:06:50,883 [INFO] Цена: 69806.80 | MA: 69916.52 | Тренд: Down
+2026-03-24 19:07:50,884 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:07:51,803 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:07:51,807 [INFO] Цена: 69862.50 | MA: 69927.66 | Тренд: Down
+2026-03-24 19:08:51,808 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:08:52,749 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:08:52,758 [INFO] Цена: 69800.00 | MA: 69915.16 | Тренд: Down
+2026-03-24 19:09:52,759 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:09:53,381 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:09:53,393 [INFO] Цена: 69849.20 | MA: 69925.00 | Тренд: Down
+2026-03-24 19:10:53,393 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:10:54,529 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:10:54,559 [INFO] Цена: 69871.10 | MA: 69929.38 | Тренд: Down
+2026-03-24 19:11:54,560 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:11:55,020 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:11:55,038 [INFO] Цена: 69847.50 | MA: 69924.66 | Тренд: Down
+2026-03-24 19:12:55,039 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:12:55,324 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:12:55,346 [INFO] Цена: 69903.60 | MA: 69935.88 | Тренд: Down
+2026-03-24 19:13:07,724 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 19:26:52,590 [INFO] АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2923.76694568 USDT
+2026-03-24 19:26:52,592 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 19:26:52,592 [INFO] Бот запущен и начинает работу...
+2026-03-24 19:26:52,593 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 19:26:52,593 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:26:52,897 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:26:52,904 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69661.10 ниже MA: 69877.38 Тренд: Down
+2026-03-24 19:26:53,661 [ERROR] Не удалось продать: bybit fetchOrder() can only access an order if it is in last 500 orders(of any status) for your account. Set params["acknowledged"] = True to hide self warning. Alternatively, we suggest to use fetchOpenOrder or fetchClosedOrder
+2026-03-24 19:26:53,662 [INFO] Цена: 69661.10 | MA: 69877.38 | Тренд: Down
+2026-03-24 19:27:53,663 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:27:54,185 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:27:54,190 [INFO] Цена: 69816.10 | MA: 69908.38 | Тренд: Down
+2026-03-24 19:28:54,191 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:28:54,488 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:28:54,505 [INFO] Цена: 69761.50 | MA: 69897.46 | Тренд: Down
+2026-03-24 19:29:54,506 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:29:55,375 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 19:39:21,567 [INFO] АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2923.72863207 USDT
+2026-03-24 19:39:21,568 [INFO] Режим Demo-торговли Bybit активирован.
+2026-03-24 19:39:21,568 [INFO] Бот запущен и начинает работу...
+2026-03-24 19:39:21,569 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 19:39:21,569 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 19:39:22,148 [INFO] Получено 100 свечей за сегодня
+2026-03-24 19:39:22,168 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69407.70 ниже MA: 69781.36 Тренд: Down
+2026-03-24 19:39:22,908 [INFO] Ордер отправлен успешно! ID: 7f3ffcc6-a09b-427d-afc7-a25a96f0fd8f
+2026-03-24 19:39:24,162 [INFO] 💰 Сделка совершена. Новый баланс: 2923.69 USDT
+2026-03-24 19:39:24,163 [INFO] Цена: 69407.70 | MA: 69781.36 | Тренд: Down
+2026-03-24 19:40:20,609 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 21:09:45,376 [ERROR] Не удалось проверить IP через прокси: HTTPSConnectionPool(host='api.ipify.org', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 407 Proxy Authentication Required')))
+2026-03-24 21:09:45,565 [ERROR] ❌ Критическая ошибка при подключении к бирже: bybit GET https://api-demo.bybit.com/v5/market/time
+2026-03-24 21:11:31,086 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 21:11:38,140 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2923.69047477 USDT
+2026-03-24 21:11:38,141 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 21:11:38,142 [INFO] Бот запущен и начинает работу...
+2026-03-24 21:11:38,142 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 21:11:38,143 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 21:11:38,411 [INFO] Получено 100 свечей за сегодня
+2026-03-24 21:11:38,524 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 69287.50 выше MA: 69145.82 Тренд: Up
+2026-03-24 21:11:39,293 [INFO] Ордер отправлен успешно! ID: 28f8f1b3-d16d-4021-93bf-39696e3f8a6d
+2026-03-24 21:11:40,561 [INFO] 💰 Сделка совершена. Новый баланс: 2924.83 USDT
+2026-03-24 21:11:40,561 [INFO] Цена: 69287.50 | MA: 69145.82 | Тренд: Up
+2026-03-24 21:12:40,563 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 21:12:40,855 [INFO] Получено 100 свечей за сегодня
+2026-03-24 21:12:40,878 [INFO] Цена: 69285.30 | MA: 69145.38 | Тренд: Up
+2026-03-24 21:13:09,036 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 21:32:49,652 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 21:32:56,135 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2924.83179352 USDT
+2026-03-24 21:32:56,136 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 21:32:56,136 [INFO] Бот запущен и начинает работу...
+2026-03-24 21:32:56,137 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 21:32:56,137 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 21:32:56,392 [INFO] Получено 100 свечей за сегодня
+2026-03-24 21:32:56,411 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 69491.30 выше MA: 69257.66 Тренд: Up
+2026-03-24 21:32:57,161 [INFO] Ордер отправлен успешно! ID: 8c623ce2-e9af-4c98-b7d1-50833e4a65a5
+2026-03-24 21:32:58,434 [INFO] 💰 Сделка совершена. Новый баланс: 2924.45 USDT
+2026-03-24 21:32:58,435 [INFO] Цена: 69491.30 | MA: 69257.66 | Тренд: Up
+2026-03-24 21:33:09,479 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 21:36:42,210 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 21:36:48,133 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2924.44959082 USDT
+2026-03-24 21:36:48,134 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 21:36:48,134 [INFO] Бот запущен и начинает работу...
+2026-03-24 21:36:48,135 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 21:36:48,136 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 21:36:48,403 [INFO] Получено 100 свечей за сегодня
+2026-03-24 21:36:48,428 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 69565.40 выше MA: 69272.48 Тренд: Up
+2026-03-24 21:36:49,194 [INFO] Ордер отправлен успешно! ID: 525f127c-79b9-4105-a04f-007e5c6d0242
+2026-03-24 21:36:50,421 [INFO] 💰 Сделка совершена. Новый баланс: 2924.07 USDT
+2026-03-24 21:36:50,422 [INFO] Цена: 69565.40 | MA: 69272.48 | Тренд: Up
+2026-03-24 21:37:24,570 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:29:26,144 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:29:26,232 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:29:33,439 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2924.06698167 USDT
+2026-03-24 22:29:33,440 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:29:33,441 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:29:33,441 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:29:33,442 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:29:33,776 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:29:33,843 [WARNING] СИГНАЛ НА ПОКУПКУ: Цена 69485.30 выше MA: 69467.54 Тренд: Up
+2026-03-24 22:29:34,606 [INFO] Ордер отправлен успешно! ID: ee78f307-99ca-4484-ba8b-2404ee14897c
+2026-03-24 22:29:35,863 [INFO] 💰 Сделка совершена. Новый баланс: 2923.68 USDT
+2026-03-24 22:29:35,864 [INFO] Цена: 69485.30 | MA: 69467.54 | Тренд: Up
+2026-03-24 22:29:57,901 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:39:30,840 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:39:30,868 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:39:35,559 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2923.68481252 USDT
+2026-03-24 22:39:35,560 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:39:35,560 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:39:35,561 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:39:35,561 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:39:35,820 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:39:35,839 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69400.90 ниже MA: 69475.66 Тренд: Down
+2026-03-24 22:39:36,760 [INFO] Ордер отправлен успешно! ID: 33b9581d-170f-4ed8-b2a7-8a6c3c7f12f8
+2026-03-24 22:39:38,022 [INFO] 💰 Сделка совершена. Новый баланс: 2922.58 USDT
+2026-03-24 22:39:38,023 [INFO] Цена: 69400.90 | MA: 69475.66 | Тренд: Down
+2026-03-24 22:40:35,315 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:41:29,455 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:41:29,479 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:41:35,668 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2922.58258942 USDT
+2026-03-24 22:41:35,669 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:41:35,669 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:41:35,670 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:41:35,670 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:41:36,308 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:41:36,338 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69408.20 ниже MA: 69477.12 Тренд: Down
+2026-03-24 22:41:37,090 [INFO] Ордер отправлен успешно! ID: 737941da-309f-4e0d-8589-180c8cc17565
+2026-03-24 22:41:38,353 [INFO] 💰 Сделка совершена. Новый баланс: 2921.52 USDT
+2026-03-24 22:41:38,354 [INFO] Цена: 69408.20 | MA: 69477.12 | Тренд: Down
+2026-03-24 22:42:02,527 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:43:39,086 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:43:39,109 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:43:45,167 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2921.52034432 USDT
+2026-03-24 22:43:45,168 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:43:45,169 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:43:45,169 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:43:45,170 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:43:45,483 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:43:45,509 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69419.80 ниже MA: 69479.44 Тренд: Down
+2026-03-24 22:43:46,287 [INFO] Ордер отправлен успешно! ID: 94174d25-8b47-4f7d-a1a7-8a09d58640fd
+2026-03-24 22:43:47,547 [INFO] 💰 Сделка совершена. Новый баланс: 2920.57 USDT
+2026-03-24 22:43:47,548 [INFO] Цена: 69419.80 | MA: 69479.44 | Тренд: Down
+2026-03-24 22:43:57,525 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:51:53,275 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:51:53,301 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:51:59,383 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2920.57403542 USDT
+2026-03-24 22:51:59,384 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:51:59,385 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:51:59,386 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:51:59,386 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:51:59,702 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:51:59,727 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69260.40 ниже MA: 69431.42 Тренд: Down
+2026-03-24 22:52:00,499 [INFO] Ордер отправлен успешно! ID: e62bf5e8-bd9f-45c2-a23e-2dc314b7e19f
+2026-03-24 22:52:01,763 [INFO] 💰 Сделка совершена. Новый баланс: 2918.90 USDT
+2026-03-24 22:52:01,764 [INFO] Цена: 69260.40 | MA: 69431.42 | Тренд: Down
+2026-03-24 22:52:36,777 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-24 22:55:12,447 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-24 22:55:12,765 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-24 22:55:12,774 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-24 22:55:18,374 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2918.90339827 USDT
+2026-03-24 22:55:18,374 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-24 22:55:18,375 [INFO] Бот запущен и начинает работу...
+2026-03-24 22:55:18,375 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-24 22:55:18,376 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-24 22:55:18,643 [INFO] Получено 100 свечей за сегодня
+2026-03-24 22:55:18,663 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 69314.30 ниже MA: 69442.20 Тренд: Down
+2026-03-24 22:55:19,756 [INFO] Ордер отправлен успешно! ID: 011481ed-5fa5-4ec8-a8ea-846743f62bdf
+2026-03-24 22:55:21,021 [INFO] 💰 Сделка совершена. Новый баланс: 2918.52 USDT
+2026-03-24 22:55:21,022 [INFO] Цена: 69314.30 | MA: 69442.20 | Тренд: Down
+2026-03-24 22:55:27,785 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-25 06:14:23,349 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-25 06:14:23,692 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:14:23,708 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-25 06:16:12,616 [INFO] Внешний IP через прокси: 154.219.207.178
+2026-03-25 06:16:12,953 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:16:12,982 [INFO] Прокси успешно внедрены в объект exchange.
+2026-03-25 06:16:20,272 [INFO] ✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: 2917.19415361 USDT
+2026-03-25 06:16:20,273 [INFO] Работа через прокси: ВКЛЮЧЕНА
+2026-03-25 06:16:20,588 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:16:20,592 [INFO] Бот запущен и начинает работу...
+2026-03-25 06:16:20,593 [INFO] Минимальный лот для BTC/USDT:USDT: 0.001
+2026-03-25 06:16:20,594 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-25 06:16:20,853 [INFO] Получено 100 свечей за сегодня
+2026-03-25 06:16:20,892 [WARNING] СИГНАЛ НА ПРОДАЖУ: Цена 70385.00 ниже MA: 70518.12 Тренд: Down
+2026-03-25 06:16:21,202 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:16:21,968 [INFO] Ордер отправлен успешно! ID: 9b07dbf4-0dc4-4920-8b70-005671878ea3
+2026-03-25 06:16:22,280 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:16:23,536 [INFO] 💰 Сделка совершена. Новый баланс: 2916.81 USDT
+2026-03-25 06:16:23,850 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
+2026-03-25 06:16:23,853 [INFO] Цена: 70385.00 | MA: 70518.12 | Тренд: Down
+2026-03-25 06:17:23,853 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-25 06:17:24,584 [INFO] Получено 100 свечей за сегодня
+2026-03-25 06:17:24,606 [INFO] Цена: 70454.80 | MA: 70532.08 | Тренд: Down
+2026-03-25 06:18:24,610 [INFO] Запрос данных для BTC/USDT:USDT на таймфрейме 15m ...
+2026-03-25 06:18:24,898 [INFO] Получено 100 свечей за сегодня
+2026-03-25 06:18:24,908 [INFO] Цена: 70455.50 | MA: 70532.22 | Тренд: Down
+2026-03-25 06:19:04,811 [INFO] Прощай, хозяин! Я ухожу на покой, все ордера под контролем.
+2026-03-25 06:19:05,339 [INFO] Уведомление в Telegram доставлено через HTTP-прокси
