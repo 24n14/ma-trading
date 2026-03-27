@@ -16,7 +16,10 @@ CATEGORY = 'linear'
 TIMEFRAME = '15m'
 ORDER_AMOUNT = 0.01
 LIMIT = 100
-
+TP_PCT = 0.02  # 2% Тейк-профит
+SL_PCT = 0.01  # 1% Стоп-лосс
+in_position = False
+entry_price = 0.0
 #  ====ПАРАМЕТРЫ ИНДИКАТОРА====
 MA_PERIOD = 5
 #  =====ПАРАМЕТРЫ ПРОКСИ =====
