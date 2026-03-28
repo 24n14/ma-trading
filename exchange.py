@@ -2,13 +2,19 @@ import logging
 import ccxt
 import datetime
 import talib
+import numpy as np
 import pandas as pd
 import time
 import config
 import requests
 import asyncio
 from info_in_telegram import TelegramNotifier
-
+from open_position import open_position
+from close_position import close_position
+from ma import check_ma_signal
+from tp_sl import check_tp_sl
+from macd import calculate_macd
+from checking_signals import check_combined_signal_advanced
 # Настройка логирования
 log_filename = "bot_history.log"
 logging.basicConfig(
@@ -24,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 # 2. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 # ============================================
-
+global active_position
 symbol = config.SYMBOL
 timeframe = config.TIMEFRAME
 limit = config.LIMIT
@@ -47,7 +53,8 @@ active_position = {
 
 # 3. КОНФИГУРАЦИЯ ПРОКСИ
 # ============================================
-
+loop = asyncio.new_event_loop()  # Потом везде использовать: loop.run_until_complete(notifier.send_message(msg)) вместо asyncio.run(notifier.send_message(msg))
+asyncio.set_event_loop(loop)
 proxy_settings = {
     'host': config.PROXY_HOST,
     'port': config.PROXY_PORT,
@@ -73,7 +80,7 @@ try:
     test_ip = requests.get('https://api.ipify.org', proxies=proxies, timeout=10).text
     logger.info(f"Внешний IP через прокси: {test_ip}")
     msg = f"Работаем через прокси {test_ip}"
-    asyncio.run(notifier.send_message(msg))
+    loop.run_until_complete(notifier.send_message(msg))
 except Exception as e:
     logger.error(f"Не удалось проверить IP через прокси: {e}")
 
@@ -104,11 +111,11 @@ try:
     logger.info(f"✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: {usdt_balance} USDT")
     logger.info(f"Работа через прокси: {'ВКЛЮЧЕНА' if config.USE_PROXY else 'ВЫКЛЮЧЕНА'}")
     msg = f"АВТОРИЗАЦИЯ УСПЕШНА! Баланс {usdt_balance} USDT"
-    asyncio.run(notifier.send_message(msg))
+    loop.run_until_complete(notifier.send_message(msg))
 except Exception as e:
     logger.error(f"❌ Критическая ошибка при подключении к бирже: {e}")
     msg = f"❌ Критическая ошибка при подключении к бирже: {e}"
-    asyncio.run(notifier.send_message(msg))
+    loop.run_until_complete(notifier.send_message(msg))
     exit()
 
 try:
@@ -155,223 +162,89 @@ def analyze_price(candles, ma_period):
         'ma_str': f"{last_row['ma']:.2f}"
     }
 
-
-# 6. ФУНКЦИИ ДЛЯ РАБОТЫ С TP/SL
-# ============================================
-
-def open_position(exchange, symbol, side, amount, current_price):
-    """Открытие позиции с расчётом TP и SL"""
-    try:
-        if side == 'long':
-            order = exchange.create_market_buy_order(symbol, amount)
-            side_text = "LONG 📈"
-        else:
-            order = exchange.create_market_sell_order(symbol, amount)
-            side_text = "SHORT 📉"
-
-        entry_price = order.get('average') or current_price
-        tp_price = entry_price * (1 + TP_PERCENT) if side == 'long' else entry_price * (1 - TP_PERCENT)
-        sl_price = entry_price * (1 - SL_PERCENT) if side == 'long' else entry_price * (1 + SL_PERCENT)
-
-        # Обновляем глобальную переменную позиции
-        active_position['is_open'] = True
-        active_position['side'] = side
-        active_position['entry_price'] = entry_price
-        active_position['tp_price'] = tp_price
-        active_position['sl_price'] = sl_price
-        active_position['order_id'] = order.get('id')
-        active_position['quantity'] = amount
-
-        logger.info(
-            f"✅ ПОЗИЦИЯ ОТКРЫТА ({side_text})\n"
-            f"Вход: {entry_price:.2f} USDT\n"
-            f"TP: {tp_price:.2f} USDT (+{TP_PERCENT*100}%)\n"
-            f"SL: {sl_price:.2f} USDT (-{SL_PERCENT*100}%)\n"
-            f"Объём: {amount}"
-        )
-
-        msg = (
-            f"✅ ПОЗИЦИЯ ОТКРЫТА ({side_text})\n"
-            f"Вход: {entry_price:.2f} USDT\n"
-            f"TP: {tp_price:.2f} USDT\n"
-            f"SL: {sl_price:.2f} USDT"
-        )
-        asyncio.run(notifier.send_message(msg))
-
-        return True
-
-    except Exception as e:
-        logger.error(f"❌ Ошибка при открытии позиции: {e}")
-        msg = f"❌ Ошибка при открытии позиции: {e}"
-        asyncio.run(notifier.send_message(msg))
-        return False
-
-
-def check_tp_sl(exchange, symbol, current_price):
-    """Проверка достижения TP или SL"""
-    if not active_position['is_open']:
-        return
-
-    tp_price = active_position['tp_price']
-    sl_price = active_position['sl_price']
-    side = active_position['side']
-    entry_price = active_position['entry_price']
-
-    # Проверка Take Profit для LONG
-    if side == 'long' and current_price >= tp_price:
-        close_position(exchange, symbol, 'long', current_price, 'TP ✅')
-        return
-
-    # Проверка Stop Loss для LONG
-    if side == 'long' and current_price <= sl_price:
-        close_position(exchange, symbol, 'long', current_price, 'SL ❌')
-        return
-
-    # Проверка Take Profit для SHORT
-    if side == 'short' and current_price <= tp_price:
-        close_position(exchange, symbol, 'short', current_price, 'TP ✅')
-        return
-
-    # Проверка Stop Loss для SHORT
-    if side == 'short' and current_price >= sl_price:
-        close_position(exchange, symbol, 'short', current_price, 'SL ❌')
-        return
-
-    # Логирование текущего статуса
-    profit_loss = ((current_price - entry_price) / entry_price) * 100 if side == 'long' else ((entry_price - current_price) / entry_price) * 100
-    logger.info(
-        f"📊 ПОЗИЦИЯ В РАБОТЕ ({side.upper()})\n"
-        f"Текущая цена: {current_price:.2f}\n"
-        f"TP: {tp_price:.2f} | SL: {sl_price:.2f}\n"
-        f"P/L: {profit_loss:+.2f}%"
-    )
-
-
-def close_position(exchange, symbol, side, current_price, reason):
-    """Закрытие позиции по TP или SL"""
-    try:
-        entry_price = active_position['entry_price']
-        quantity = active_position['quantity']
-
-        if side == 'long':
-            order = exchange.create_market_sell_order(symbol, quantity)
-        else:
-            order = exchange.create_market_buy_order(symbol, quantity)
-
-        exit_price = order.get('average') or current_price
-        profit_loss = (exit_price - entry_price) * quantity if side == 'long' else (entry_price - exit_price) * quantity
-        profit_loss_percent = ((exit_price - entry_price) / entry_price) * 100 if side == 'long' else ((entry_price - exit_price) / entry_price) * 100
-
-        # Закрываем позицию
-        active_position['is_open'] = False
-
-        emoji = "✅" if profit_loss > 0 else "❌"
-        logger.info(
-            f"{emoji} ПОЗИЦИЯ ЗАКРЫТА ({reason})\n"
-            f"Вход: {entry_price:.2f}\n"
-            f"Выход: {exit_price:.2f}\n"
-            f"Прибыль/Убыток: {profit_loss:.2f} USDT ({profit_loss_percent:+.2f}%)"
-        )
-
-        msg = (
-            f"{emoji} ПОЗИЦИЯ ЗАКРЫТА ({reason})\n"
-            f"Вход: {entry_price:.2f}\n"
-            f"Выход: {exit_price:.2f}\n"
-            f"Прибыль/Убыток: {profit_loss:+.2f} USDT ({profit_loss_percent:+.2f}%)"
-        )
-        asyncio.run(notifier.send_message(msg))
-
-        # Обновляем баланс
-        time.sleep(1)
-        new_balance = exchange.fetch_balance()['total'].get('USDT', 0)
-        logger.info(f"💰 Новый баланс: {new_balance:.2f} USDT")
-        msg = f"💰 Новый баланс: {new_balance:.2f} USDT"
-        asyncio.run(notifier.send_message(msg))
-
-    except Exception as e:
-        logger.error(f"❌ Ошибка при закрытии позиции: {e}")
-        msg = f"❌ Ошибка при закрытии позиции: {e}"
-        asyncio.run(notifier.send_message(msg))
-
-
 # 7. ГЛАВНЫЙ ТОРГОВЫЙ ЦИКЛ
 # ============================================
-
 last_trend = None
 
 try:
     while True:
-        now = datetime.datetime.now(datetime.UTC)
-        start_of_day = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        since_timestamp = int(start_of_day.timestamp() * 1000)
-
         try:
             candles = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
-            logger.info(f"Запрос данных для {symbol} на таймфрейме {timeframe}")
-            logger.info(f"Получено {len(candles)} свечей")
 
             if candles is None:
                 continue
 
-        except ccxt.NetworkError as e:
-            logger.error(f"Проблема с сетью: {e}. Ждем 30 сек...")
-            msg = f"Проблема с сетью: {e}. Ждем 30 сек..."
-            asyncio.run(notifier.send_message(msg))
-            time.sleep(30)
-            continue
+            # Преобразование в массив цен (ОДИН РАЗ)
+            closes = np.array([candle[4] for candle in candles], dtype=np.float64)
+            price = closes[-1]
 
-        # Преобразуем в DataFrame
-        df = pd.DataFrame(candles, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
-        df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+            # ✅ MA сигнал
+            ma_signal = check_ma_signal(candles, ma_period)
+            logger.info(f"🔵 MA SIGNAL: {ma_signal}")
 
-        # Расчёт SMA
-        df['ma'] = talib.SMA(df['close'], timeperiod=ma_period)
+            # ✅ MACD сигнал (ОДИН РАЗ)
+            macd_result = calculate_macd(closes)
+            if macd_result:
+                logger.info(f"🟣 MACD: {macd_result['macd']:.2f} | "
+                            f"Signal Line: {macd_result['signal_line']:.2f} | "
+                            f"Histogram: {macd_result['histogram']:.2f} | "
+                            f"MACD Signal: {macd_result['signal']}")
+            else:
+                logger.info("🟣 MACD: Недостаточно данных")
+                macd_result = None
 
-        # Определение тренда
-        df['trend'] = 'Neutral'
-        df.loc[df['close'] > df['ma'], 'trend'] = 'Up'
-        df.loc[df['close'] < df['ma'], 'trend'] = 'Down'
+            # ✅ Комбинированный сигнал (ПРАВИЛЬНЫЕ ПАРАМЕТРЫ)
+            if ma_signal and macd_result:
+                combined_signal = check_combined_signal_advanced(ma_signal, macd_result)
+                logger.info(f"🟢 COMBINED SIGNAL: {combined_signal}")
+            else:
+                logger.warning("⚠️ Не удалось получить оба сигнала")
+                combined_signal = 'HOLD'
 
-        last_row = df.iloc[-1]
-        current_trend = last_row['trend']
-        price = last_row['close']
-        ma_val = f"{last_row['ma']:.2f}" if not pd.isna(last_row['ma']) else 'NaN'
+            # 🔥 ПРОВЕРЯЕМ TP/SL
+            if active_position['is_open']:
+                active_position = check_tp_sl(
+                    exchange, symbol, price, active_position
+                )
 
-        # 🔥 ПРОВЕРЯЕМ TP/SL ЕСЛИ ПОЗИЦИЯ ОТКРЫТА
-        if active_position['is_open']:
-            check_tp_sl(exchange, symbol, price)
+            # ЛОГИКА ВХОДА
+            if combined_signal == 'BUY' and not active_position['is_open']:
+                quantity = AMOUNT / price
+                active_position = open_position(
+                    symbol=symbol,
+                    quantity=quantity,
+                    sl_percent=config.STOP_LOSS,
+                    active_position=active_position,
+                    notifier=notifier,
+                    loop=loop,
+                    exchange=exchange,
+                    side='long',
+                    tp_percent=TP_PERCENT
+                )
 
-        # Логика входа в позицию
-        if not pd.isna(last_row['ma']):
-            if current_trend == 'Up' and last_trend != 'Up':
-                logger.warning(f"🔔 СИГНАЛ НА ПОКУПКУ: Цена {price:.2f} > MA {ma_val}")
-                msg = f"🔔 СИГНАЛ НА ПОКУПКУ: Цена {price:.2f} > MA {ma_val}"
-                asyncio.run(notifier.send_message(msg))
-
-                if not active_position['is_open']:
-                    open_position(exchange, symbol, 'long', AMOUNT, price)
-
-            elif current_trend == 'Down' and last_trend != 'Down':
-                logger.warning(f"🔔 СИГНАЛ НА ПРОДАЖУ: Цена {price:.2f} < MA {ma_val}")
-                msg = f"🔔 СИГНАЛ НА ПРОДАЖУ: Цена {price:.2f} < MA {ma_val}"
-                asyncio.run(notifier.send_message(msg))
-
-                if not active_position['is_open']:
-                    open_position(exchange, symbol, 'short', AMOUNT, price)
-
-            last_trend = current_trend
-            logger.info(f"📊 Цена: {price:.2f} | MA: {ma_val} | Тренд: {current_trend}")
+            elif combined_signal == 'SELL' and not active_position['is_open']:
+                quantity = AMOUNT / price
+                active_position = open_position(
+                    symbol=symbol,
+                    quantity=quantity,
+                    sl_percent=config.STOP_LOSS,
+                    active_position=active_position,
+                    notifier=notifier,
+                    loop=loop,
+                    exchange=exchange,
+                    side='short',
+                    tp_percent=TP_PERCENT
+                )
 
             time.sleep(60)
 
+        except ccxt.NetworkError as e:
+            logger.error(f"Проблема с сетью: {e}")
+            time.sleep(30)
+            continue
+
 except Exception as e:
     logger.error(f"Критическая ошибка: {e}", exc_info=True)
-    msg = f"Критическая ошибка: {e}"
-    asyncio.run(notifier.send_message(msg))
-    time.sleep(10)
 
 except KeyboardInterrupt:
-    print("\n")
-    logger.info("Бот остановлен. Все ордера под контролем.")
-    msg = f"Бот остановлен. Все ордера под контролем."
-    asyncio.run(notifier.send_message(msg))
+    logger.info("Бот остановлен")

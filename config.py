@@ -20,11 +20,20 @@ TP_PCT = 0.02  # 2% Тейк-профит
 SL_PCT = 0.01  # 1% Стоп-лосс
 in_position = False
 entry_price = 0.0
-#  ====ПАРАМЕТРЫ ИНДИКАТОРА====
-MA_PERIOD = 5
+#  ====ПАРАМЕТРЫ MOVING AVERAGE====
+MA_PERIOD = 20
 #  =====ПАРАМЕТРЫ ПРОКСИ =====
 PROXY_HOST = '154.219.207.178'
 PROXY_PORT = '63690'
 PROXY_USER = os.getenv('PROXY_USER')
 PROXY_PASS = os.getenv('PROXY_PASS')
 USE_PROXY = True
+# ===== MACD ПАРАМЕТРЫ =====
+MACD_FAST = 12      # Быстрая линия (дефолт для MACD)
+MACD_SLOW = 26      # Медленная линия
+MACD_SIGNAL = 9     # Сигнальная линия
+# ============ УПРАВЛЕНИЕ РИСКОМ ============
+STOP_LOSS = 1          # Стоп-лосс в процентах (2%)
+TAKE_PROFIT = 2        # Тейк-профит в процентах (5%)
+POSITION_SIZE = 50.0    # Размер позиции в USDT
+MAX_POSITIONS = 3
