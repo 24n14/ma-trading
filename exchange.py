@@ -107,7 +107,15 @@ try:
     exchange.urls['api'] = exchange.urls['demotrading']
     balance = exchange.fetch_balance()
     usdt_balance = balance['total'].get('USDT', 0)
-
+    # ===== ДОБАВЛЯЕМ УСТАНОВКУ ПЛЕЧА =====
+    try:
+        # Устанавливаем плечо для монеты (на Bybit это обязательный шаг)
+        exchange.set_leverage(config.LEVERAGE, config.SYMBOL)
+        logger.info(f"✅ Плечо {config.LEVERAGE}x успешно установлено для {config.SYMBOL}")
+    except Exception as e:
+        # Если плечо уже 10, Bybit выдаст ошибку "leverage not modified" — это нормально
+        logger.warning(f"⚠️ Установка плеча: {e}")
+    # =====================================
     logger.info(f"✅ АВТОРИЗАЦИЯ УСПЕШНА! Баланс: {usdt_balance} USDT")
     logger.info(f"Работа через прокси: {'ВКЛЮЧЕНА' if config.USE_PROXY else 'ВЫКЛЮЧЕНА'}")
     msg = f"АВТОРИЗАЦИЯ УСПЕШНА! Баланс {usdt_balance} USDT"
@@ -204,12 +212,12 @@ try:
             # 🔥 ПРОВЕРЯЕМ TP/SL
             if active_position['is_open']:
                 active_position = check_tp_sl(
-                    exchange, symbol, price, active_position
+                    exchange, symbol, active_position, price, notifier
                 )
 
             # ЛОГИКА ВХОДА
             if combined_signal == 'BUY' and not active_position['is_open']:
-                quantity = AMOUNT / price
+                quantity = round((config.POSITION_SIZE * config.LEVERAGE) / price, 3)
                 active_position = open_position(
                     symbol=symbol,
                     quantity=quantity,
@@ -223,7 +231,7 @@ try:
                 )
 
             elif combined_signal == 'SELL' and not active_position['is_open']:
-                quantity = AMOUNT / price
+                quantity = round((config.POSITION_SIZE * config.LEVERAGE) / price, 3)
                 active_position = open_position(
                     symbol=symbol,
                     quantity=quantity,

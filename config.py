@@ -20,6 +20,7 @@ TP_PCT = 0.02  # 2% Тейк-профит
 SL_PCT = 0.01  # 1% Стоп-лосс
 in_position = False
 entry_price = 0.0
+LEVERAGE = 10
 #  ====ПАРАМЕТРЫ MOVING AVERAGE====
 MA_PERIOD = 20
 #  =====ПАРАМЕТРЫ ПРОКСИ =====
@@ -33,7 +34,7 @@ MACD_FAST = 12      # Быстрая линия (дефолт для MACD)
 MACD_SLOW = 26      # Медленная линия
 MACD_SIGNAL = 9     # Сигнальная линия
 # ============ УПРАВЛЕНИЕ РИСКОМ ============
-STOP_LOSS = 1          # Стоп-лосс в процентах (2%)
-TAKE_PROFIT = 2        # Тейк-профит в процентах (5%)
-POSITION_SIZE = 50.0    # Размер позиции в USDT
+STOP_LOSS = 0.01          # Стоп-лосс в процентах (2%)
+TAKE_PROFIT = 0.02        # Тейк-профит в процентах (5%)
+POSITION_SIZE = 100.0    # Размер позиции в USDT
 MAX_POSITIONS = 3

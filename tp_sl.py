@@ -63,4 +63,4 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
         f"TP: {tp_price:.2f} | SL: {sl_price:.2f}\n"
         f"P/L: {profit_loss:+.2f}%"
     )
-
+    return active_position
