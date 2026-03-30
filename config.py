@@ -20,6 +20,7 @@ TP_PCT = 0.02  # 2% Тейк-профит
 SL_PCT = 0.01  # 1% Стоп-лосс
 in_position = False
 entry_price = 0.0
+LEVERAGE = 10
 #  ====ПАРАМЕТРЫ MOVING AVERAGE====
 MA_PERIOD = 20
 #  =====ПАРАМЕТРЫ ПРОКСИ =====
