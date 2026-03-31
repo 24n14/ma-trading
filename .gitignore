@@ -3,3 +3,4 @@
 __pycache__/
 bot_history.log
 qodana.yaml
+config.py
