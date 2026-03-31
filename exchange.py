@@ -37,8 +37,8 @@ limit = config.LIMIT
 ma_period = config.MA_PERIOD
 AMOUNT = config.ORDER_AMOUNT
 
-TP_PERCENT = 0.02  # 2% Take Profit
-SL_PERCENT = 0.01  # 1% Stop Loss
+TP_PERCENT = config.TAKE_PROFIT  # 2% Take Profit
+SL_PERCENT = config.STOP_LOSS  # 1% Stop Loss
 
 # Переменные для отслеживания позиции
 active_position = {
