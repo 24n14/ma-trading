@@ -18,7 +18,7 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
     # Проверка Take Profit для LONG
     if side == 'long' and current_price >= tp_price:
         active_position = close_position.close_position(
-            exchange, symbol, 'long', current_price, 'TP ✅', active_position
+            exchange, symbol, 'long', current_price, 'TP ✅', active_position, notifier
         )
         # Уведомление
         if notifier:
@@ -27,8 +27,8 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
 
     # Проверка Stop Loss для LONG
     if side == 'long' and current_price <= sl_price:
-        active_position = close_position.close_position(  # ← ДОБАВЬ .close_position
-            exchange, symbol, 'long', current_price, 'SL ❌', active_position  # ← ДОБАВЬ active_position
+        active_position = close_position.close_position(
+            exchange, symbol, 'long', current_price, 'SL ❌', active_position, notifier
         )
         # Уведомление
         if notifier:
@@ -37,8 +37,8 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
 
     # Проверка Take Profit для SHORT
     if side == 'short' and current_price <= tp_price:
-        active_position = close_position.close_position(  # ← ДОБАВЬ .close_position
-            exchange, symbol, 'short', current_price, 'TP ✅', active_position  # ← ДОБАВЬ active_position
+        active_position = close_position.close_position(
+            exchange, symbol, 'short', current_price, 'TP ✅', active_position, notifier
         )
         # Уведомление
         if notifier:
@@ -47,8 +47,8 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
 
     # Проверка Stop Loss для SHORT
     if side == 'short' and current_price >= sl_price:
-        active_position = close_position.close_position(  # ← ДОБАВЬ .close_position
-            exchange, symbol, 'short', current_price, 'SL ❌', active_position  # ← ДОБАВЬ active_position
+        active_position = close_position.close_position(
+            exchange, symbol, 'short', current_price, 'SL ❌', active_position, notifier
         )
         # Уведомление
         if notifier:
