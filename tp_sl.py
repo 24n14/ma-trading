@@ -14,7 +14,7 @@ def check_tp_sl(exchange, symbol, active_position, current_price, notifier):
     sl_price = active_position['sl_price']
     side = active_position['side']
     entry_price = active_position['entry_price']
-    position_size = active_position['size']
+    position_size = active_position['quantity']
 
     # Определяем, сработал ли TP или SL
     tp_triggered = (side == 'long' and current_price >= tp_price) or \
