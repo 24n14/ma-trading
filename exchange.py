@@ -1,6 +1,5 @@
 import logging
 import ccxt
-import datetime
 import talib
 import numpy as np
 import pandas as pd
@@ -10,11 +9,11 @@ import requests
 import asyncio
 from info_in_telegram import TelegramNotifier
 from open_position import open_position
-from close_position import close_position
 from ma import check_ma_signal
 from tp_sl import check_tp_sl
 from macd import calculate_macd
 from checking_signals import check_combined_signal_advanced
+from wait_for_candle_close import wait_for_candle_close, get_timeframe_seconds
 # Настройка логирования
 log_filename = "bot_history.log"
 logging.basicConfig(
@@ -175,6 +174,10 @@ def analyze_price(candles, ma_period):
 last_trend = None
 
 try:
+    # ⏳ ЖДЕМ ЗАКРЫТИЯ СВЕЧИ ПЕРЕД СТАРТОМ БОТА
+    logger.info("⏳ Синхронизируемся с биржей... ожидаем закрытия текущей свечи")
+    wait_for_candle_close(exchange, symbol, timeframe)
+    logger.info("✅ Синхронизация завершена! Начинаем торговлю")
     while True:
         try:
             candles = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
@@ -244,7 +247,9 @@ try:
                     tp_percent=TP_PERCENT
                 )
 
-            time.sleep(60)
+            #time.sleep(60)
+            # ⏳ ЖДЕМ ЗАКРЫТИЯ СВЕЧИ ПЕРЕД СЛЕДУЮЩЕЙ ИТЕРАЦИЕЙ
+            wait_for_candle_close(exchange, symbol, timeframe)
 
         except ccxt.NetworkError as e:
             logger.error(f"Проблема с сетью: {e}")
